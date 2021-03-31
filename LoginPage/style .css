@@ -1,7 +1,3 @@
-/*
-* Begin Login Style Section
-*/
-
 /* Background */
 body{
     margin: 0;
@@ -71,12 +67,6 @@ text-align: center;
 .box input[type = "submit"]:hover{
 background: #2ecc71;
 }
-
-/*
-* Begin Modal Style Section
-* Broken Into Background / Content Box
-* Remaining = Buttons and Interactions
-*/
 
 /* Full-width input fields */
 input[type=text], input[type=password] {
@@ -185,3 +175,7 @@ hr {
      width: 100%;
   }
 }
+<<<<<<< HEAD
+=======
+</style>
+>>>>>>> eb42691540ebfec301f2a93d8894b92cb871a1cd
