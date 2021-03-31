@@ -1,4 +1,4 @@
 //Log in stuff
-function saveLogInfo(){
-    
-}
+// function saveLogInfo(){
+
+// }
