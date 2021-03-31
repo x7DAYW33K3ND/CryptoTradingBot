@@ -1,13 +1,22 @@
+/*
+* Begin Main Page Style Section
+*/
+
+/* Background */
 body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
     background: #34495e;
 }
+
+/* Standard Page - Footer (attempting footer creation) */
 #page-container {
   position: relative;
   min-height: 100vh;
 }
+
+/* Header */
 .headerbox{
 display: block;
 width: 100%;
@@ -20,6 +29,8 @@ background: #191919;
 text-align: center;
 color: white;
 }
+
+/* Data Strip */
 .centerbox{
 display: block;
 position: absolute;
@@ -31,6 +42,8 @@ padding: 5px;
 text-align: center;
 background: #FFFFFF;
 }
+
+/* Sidebar to Right of Data Strip / Potential For Transaction History */
 .sidebar right{
 display: block;
 position: absolute;
@@ -39,6 +52,8 @@ width: 15%;
 height: 100%;
 background: #34495e;
 }
+
+/* Footer - Currently Not In Use */
 #footer {
   position: relative;
   z-index: 1;

@@ -1,25 +1,36 @@
+/*
+* Begin Login Style Section
+*/
+
+/* Background */
 body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
     background: #34495e;
-  }
-  .box{
-  width: 300px;
-  padding: 40px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #191919;
-  text-align: center;
-  }
-  .box h1{
+}
+
+/* Content Box */
+.box{
+width: 300px;
+padding: 40px;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background: #191919;
+text-align: center;
+}
+
+/* Formatting <h1> text */
+.box h1{
     color: white;
     text-transform: uppercase;
     font-weight: 500;
-  }
-  .box input[type = "text"],.box input[type = "password"]{
+}
+
+/* User-Input Boxes */
+.box input[type = "text"],.box input[type = "password"]{
     border: 0;
     background: none;
     display: block;
@@ -32,12 +43,16 @@ body{
     color: white;
     border-radius: 24px;
     transition: 0.25s;
-  }
-  .box input[type = "text"]:focus,.box input[type = "password"]:focus{
+}
+
+/* User-Input Boxes (when clicked into) */
+.box input[type = "text"]:focus,.box input[type = "password"]:focus{
     width: 280px;
     border-color: #2ecc71;
-  }
-  .box input[type = "submit"]{
+}
+
+/* Login Button */
+.box input[type = "submit"]{
     border: 0;
     background: none;
     display: block;
@@ -50,28 +65,37 @@ body{
     border-radius: 24px;
     transition: 0.25s;
     cursor: pointer;
-  }
-  .box input[type = "submit"]:hover{
-  background: #2ecc71;
-  }
-  /* Full-width input fields - BEGIN SIGN UP CSS */
-  input[type=text], input[type=password] {
+}
+
+/* Login Button (when cursor hovering) */
+.box input[type = "submit"]:hover{
+background: #2ecc71;
+}
+
+/*
+* Begin Modal Style Section
+* Broken Into Background / Content Box
+* Remaining = Buttons and Interactions
+*/
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
   width: 98%;
   padding: 15px;
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
-  }
-  
-  /* Add a background color when the inputs get focus */
-  input[type=text]:focus, input[type=password]:focus {
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus, input[type=password]:focus {
   background-color: #ddd;
   outline: none;
-  }
-  
-  /* Set a style for all buttons */
-  button {
+}
+
+/* Set a style for all buttons */
+button {
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
@@ -80,31 +104,31 @@ body{
   cursor: pointer;
   width: 100%;
   opacity: 0.85;
-  }
-  
-  button:hover {
+}
+
+button:hover {
   opacity:1;
-  }
-  
-  /* Extra styles for the cancel button */
-  .cancelbtn {
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
   padding: 14px 20px;
   background-color: #f44336;
-  }
-  
-  /* Float cancel and signup buttons and add an equal width */
-  .cancelbtn, .signupbtn {
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
   float: left;
   width: 50%;
-  }
-  
-  /* Add padding to container elements */
-  .container {
+}
+
+/* Add padding to container elements */
+.container {
   padding: 50px;
-  }
-  
-  /* The Modal (background) */
-  .modal {
+}
+
+/* The Modal (background) */
+.modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -115,50 +139,50 @@ body{
   overflow: auto; /* Enable scroll if needed */
   background-color: #34495e;
   padding-top: 50px;
-  }
-  
-  /* Modal Content/Box */
-  .modal-content {
+}
+
+/* Modal Content/Box */
+.modal-content {
   background-color: #191919;
   color: white;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  
+
   width: 80%; /* Could be more or less, depending on screen size */
-  }
-  
-  /* Style the horizontal ruler */
-  hr {
+}
+
+/* Style the horizontal ruler */
+hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
-  }
-  
-  /* The Close Button (x) */
-  .close {
+}
+ 
+/* The Close Button (x) */
+.close {
   position: absolute;
   right: 35px;
   top: 15px;
   font-size: 40px;
   font-weight: bold;
   color: #f1f1f1;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
   color: #f44336;
   cursor: pointer;
-  }
-  
-  /* Clear floats */
-  .clearfix::after {
+}
+
+/* Clear floats */
+.clearfix::after {
   content: "";
   clear: both;
   display: table;
-  }
-  
-  /* Change styles for cancel button and signup button on extra small screens */
-  @media screen and (max-width: 300px) {
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
   .cancelbtn, .signupbtn {
      width: 100%;
   }
-  }
-  </style>
+}
+</style>
