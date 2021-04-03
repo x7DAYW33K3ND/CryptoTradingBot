@@ -20,7 +20,6 @@ class BBRSIOPT(IHyperOpt):
     @staticmethod
     def populate_indicators(dataframe: DataFrame, metadata: dict) -> DataFrame:
 
-
         dataframe['rsi'] = ta.RSI(dataframe)
         dataframe['sell-rsi'] = ta.RSI(dataframe)
 
@@ -72,7 +71,6 @@ class BBRSIOPT(IHyperOpt):
                 if params['trigger'] == 'bb_lower4':
                     conditions.append(dataframe['close'] < dataframe['bb_lowerband4'])
 
-
             dataframe.loc[
                 reduce(lambda x, y: x & y, conditions),
                 'buy'] = 1
@@ -115,8 +113,6 @@ class BBRSIOPT(IHyperOpt):
                     conditions.append(dataframe['close'] > dataframe['bb_middleband1'])
                 if params['sell-trigger'] == 'sell-bb_upper1':
                     conditions.append(dataframe['close'] > dataframe['bb_upperband1'])
-
-
 
             dataframe.loc[
                 reduce(lambda x, y: x & y, conditions),
