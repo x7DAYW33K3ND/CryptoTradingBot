@@ -1,21 +1,45 @@
 /** Connects login page to mainPage
  * Does not require authntication and will be removed before final release
  */
+
+// Creating user class
+var userArray = [];
+class User {
+
+    constructor(email, psw, key, skey) {
+
+        this.email = 'John';
+        this.psw = psw;
+        this.key = key;
+        this.skey = skey;
+    }
+
+    getEmail(){
+        return this.email;
+    }
+}
+// ("john", 'yes', 'key', 'skey')
+
+
+
 function logInF() {
     window.open("..\\MainPage\\MainPage.html");
+    // window.location.replace("..\\MainPage\\MainPage.html");
 }
 
 
-/** Minimizes user error when creating account password
- * 
- * @param {string} psw users password
- * @param {string} repsw users repeat password
- * @returns {boolean} if passwords match
- */
-function checkpsw(psw, repsw) {
-    if (psw == repsw) {
-        return true;
-    }
+function checkPass(){
+    var password = document.querySelector('.password').value,
+    confirmPassword =  document.querySelector('.confirmPassword').value;
+
+        if(password != confirmPassword){
+            alert("Passwords don't match try again.");
+            return false;
+        }
+        else {
+            return true;
+        }
+
 }
 
 
@@ -27,16 +51,22 @@ function checkpsw(psw, repsw) {
  * @param {string} api users API key
  * @param {string} sapi users Private API Key
  */
-function createUser(email, pws, api, sapi) {
+function createUser() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    var apikey = document.getElementById("api-key").value;
+    var sapikey = document.getElementById("secret-api-key").value;
 
-    // skeleton of funtion
+    if (checkPass()){
+        var user = new User(email, password, apikey, sapikey);
+        userArray.push(user);
+        
+    }
+
+
 }
 
 
 /**
  * Makes sure everything in the form is loaded before submitting.
  */
-
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('btn').addEventListener('click', addUser)
-});
