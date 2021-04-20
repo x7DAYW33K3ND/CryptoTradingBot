@@ -13,3 +13,5 @@ https://wiki.python.org/moin/DocumentationTools
 https://jshint.com/about/
 https://standardjs.com/
 https://github.com/jsdoc/jsdoc
+
+Freqtrade Link - https://github.com/freqtrade/freqtrade/
