@@ -3,12 +3,13 @@
  */
 
 // Creating user class
+// Document()
 var userArray = [];
 class User {
 
     constructor(email, psw, key, skey) {
 
-        this.email = 'John';
+        this.email = email;
         this.psw = psw;
         this.key = key;
         this.skey = skey;
@@ -17,8 +18,30 @@ class User {
     getEmail(){
         return this.email;
     }
+
+    getPassword(){
+        return this.password;
+    }
+
+    getKey(){
+        return this.key;
+    }
+
+    getskey(){
+        return this.skey;
+    }
+
+    setEmail(email){
+        this.email = email;
+    }
+
+    setPassword(){
+        this.password = this.password;
+    }
+
+
 }
-// ("john", 'yes', 'key', 'skey')
+
 
 
 
@@ -51,19 +74,30 @@ function checkPass(){
  * @param {string} api users API key
  * @param {string} sapi users Private API Key
  */
+
+
+// What you need to do is get these before the funtion is called
 function createUser() {
+    console.log('getting hit');
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var apikey = document.getElementById("api-key").value;
     var sapikey = document.getElementById("secret-api-key").value;
+    var user = new User(email, password, apikey, sapikey);
+    userArray.push(user);
 
     if (checkPass()){
-        var user = new User(email, password, apikey, sapikey);
+        var user = {email:email, psw:password, key:apikey, skey:sapikey};
+        // var user = new User(email, password, apikey, sapikey);
         userArray.push(user);
         
     }
 
 
+}
+
+function thisWasClicked() {
+    console.log('This was clicked');
 }
 
 
