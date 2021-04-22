@@ -59,3 +59,22 @@ background: #34495e;
   color: white;
   text-align: center;
 }
+
+/* Used For News */
+#first {
+    width: 75%;
+    float: left;
+    height: 300px;
+}
+
+/* Used For Binance.US Manual Currency Purchasing */
+#second {
+    width: 25%;
+    float: left;
+    height: 300px;
+}
+
+/* Clears #first and #second - Not sure if actually needed but will use temporarily */
+#clear {
+    clear: both;
+}
