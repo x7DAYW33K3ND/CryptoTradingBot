@@ -1,7 +1,6 @@
-class Main {
+
 //Temporary
   function logOut() {
-  window.open("ui.html");
+  window.open("..\\LoginPage\\ui.html");
 	window.close("MainPage.html");
  }
-}

@@ -72,6 +72,7 @@ function logIn() {
             if(userArray[i].getPassword() == enteredPass){
                 console.log('your in');
                 window.open("..\\MainPage\\MainPage.html");
+                window.close("ui.html");
             }else{
                 alert("Password does not match")
             }
@@ -147,6 +148,36 @@ function thisWasClicked() {
     console.log('This was clicked');
 }
 
+
+function saveToJson() {
+    const fs = require('fs');
+    try{
+        const jsonString = fs.readFileSync('./user.json', 'utf-8');
+    } catch(err){
+        console.log(err)
+    }
+    
+
+}
+
+
+
+
+// $.getJSON('contacts.json', function (json) {
+//     var array = [];
+//     for (var key in json) {
+//         if (json.hasOwnProperty(key)) {
+//             var item = json[key];
+//             array.push({
+//                 name: item.Name,
+//                 surname: item.Surname,
+//                 mobile: item.mobile,
+//                 email: item.email
+//             });            
+//         }
+//     }
+//     });
+    
 // function savetoFile(){
 //     const fs = require('fs');
 

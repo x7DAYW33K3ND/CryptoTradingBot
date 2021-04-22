@@ -48,7 +48,7 @@ text-align: center;
 }
 
 /* Login Button */
-.box input[type = "submit"]{
+.box input[type = "button"]{
     border: 0;
     background: none;
     display: block;
@@ -64,7 +64,7 @@ text-align: center;
 }
 
 /* Login Button (when cursor hovering) */
-.box input[type = "submit"]:hover{
+.box input[type = "button"]:hover{
 background: #2ecc71;
 }
 
