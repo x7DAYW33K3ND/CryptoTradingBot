@@ -65,6 +65,7 @@ background: #34495e;
     width: 75%;
     float: left;
     height: 300px;
+    text-align: left;
 }
 
 /* Used For Binance.US Manual Currency Purchasing */
