@@ -133,7 +133,7 @@ function createUser() {
     }
 
     var user = new User(email, password, apikey, sapikey); // Creates user from info given\
-    if (checkPass(password, cconfirmPassword) && checkDupAcount(email)) {
+    if (checkPass(password, confirmPassword) && checkDupAcount(email)) {
         var userToString = JSON.stringify(user);
         localStorage.setItem(email, userToString);
         return true;
@@ -157,8 +157,3 @@ function clearLocalStorage() {
     localStorage.clear();
 }
 
-
-module.exports = User;
-// module.exports = createUser();
-// module.exports = userArray;
-module.exports = checkDupAcount();
