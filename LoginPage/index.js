@@ -43,6 +43,8 @@ var user1 = new User('user1', 'pass', 'key', 'secret key');
 var user2 = new User('user2', 'pass', 'key', 'secret key');
 var user3 = new User('user3', 'pass', 'key', 'secret key');
 
+localStorage.setItem(user0.getEmail(), JSON.stringify(user0));
+
 // Adding user to array for testing
 userArray.push(user0);
 userArray.push(user1);
@@ -51,26 +53,62 @@ userArray.push(user3);
 
 
 // 
-function logIn() {
+// function logIn() {
+//     var enteredEmail = document.getElementById('loginEmail').value;
+//     var enteredPass = document.getElementById('loginPass').value;
+//     for (i = 0; i < userArray.length; i++) { // Loops through userArray.
+//         if (userArray[i].getEmail() == enteredEmail) { // Checks email.
+//             if (userArray[i].getPassword() == enteredPass) { // Checks password.
+//                 window.open("..\\MainPage\\MainPage.html"); // Closes Login page and brings user to mainPage.
+//                 window.close("ui.html");
+//             } else {
+//                 alert("Password does not match");
+//             }
+//         }
+//     }
+
+// }
+
+// LocalStorage Login
+function logIn(){
     var enteredEmail = document.getElementById('loginEmail').value;
     var enteredPass = document.getElementById('loginPass').value;
-    for (i = 0; i < userArray.length; i++) { // Loops through userArray.
-        if (userArray[i].getEmail() == enteredEmail) { // Checks email.
-            if (userArray[i].getPassword() == enteredPass) { // Checks password.
-                window.open("..\\MainPage\\MainPage.html"); // Closes Login page and brings user to mainPage.
-                window.close("ui.html");
-            } else {
-                alert("Password does not match");
-            }
-        }
-    }
 
+    var account = JSON.parse(localStorage.getItem('enteredEmail'));
+    // This is where the error is caused
+    if(account.getEmail() == null){
+        console.log('so it wasn"t you');
+      var x = JSON.parse(localStorage.getItem(enteredEmail));
+      if(x.getPassword() == enteredPass){
+        window.open("..\\MainPage\\MainPage.html"); // Closes Login page and brings user to mainPage.
+        window.close("ui.html");
+      }else{
+          alert('wrong password please try again');
+      }
+    }else{
+        alert('Account not found');
+    }
 }
 
+
+
+
 // Checks to make sure user enters correct password.
-function checkPass() {
-    var password = document.querySelector('.password').value,
-        confirmPassword = document.querySelector('.confirmPassword').value;
+// function checkPass() {
+//     var password = document.querySelector('.password').value,
+//         confirmPassword = document.querySelector('.confirmPassword').value;
+//     if (password != confirmPassword) {
+//         alert("Passwords don't match try again.");
+//         return false;
+//     }
+//     else {
+//         return true;
+//     }
+// }
+
+// New check password
+function checkPass(password){
+    confirmPassword = document.querySelector('.confirmPassword').value;
     if (password != confirmPassword) {
         alert("Passwords don't match try again.");
         return false;
@@ -80,20 +118,31 @@ function checkPass() {
     }
 }
 
+
 /**
  * Checks new users email with pre-existing acount emails.
  * @param {String} newEmail New accounts email.
  * @returns True if passwords are unique, False if passwords are not.
  */
-function checkDupAcount(newEmail) {
+// function checkDupAcount(newEmail) {
 
-    for (i = 0; i < userArray.length; i++) {
-        if (userArray[i].getEmail() == newEmail) {
-            alert("Account with Email already exists");
-            return false
-        }
+//     for (i = 0; i < userArray.length; i++) {
+//         if (userArray[i].getEmail() == newEmail) {
+//             alert("Account with Email already exists");
+//             return false
+//         }
+//     }
+//     return true;
+// }
+
+// new CheckDupAccount using localStorage
+function checkDupAcount(newEmail){
+    if(localStorage.getItem(newEmail) != null){
+        alert("Account with Email already exists");
+        return false;
+    }else{
+        return true;
     }
-    return true;
 }
 
 
@@ -101,7 +150,29 @@ function checkDupAcount(newEmail) {
  * This funtion takes in all user info from the sign up page
  *  and creates a user object from the peramiters
 */
-function createUser() {
+// function createUser() {
+//     var email = document.getElementById("email").value;
+//     var password = document.getElementById("password").value;
+//     var apikey = document.getElementById("api-key").value;
+//     var sapikey = document.getElementById("secret-api-key").value;
+
+//     // Validates there are no null fields
+//     if (email == '' || password == '' || apikey == '' || sapikey == '') {
+//         alert("Please fill all fields in");
+//         return;
+//     }
+
+//     var user = new User(email, password, apikey, sapikey); // Creates user from info given
+
+//     // Makes sure passwords are the same and there is no other created account with the same email.
+//     if (checkPass() && checkDupAcount(email)) {
+//         userArray.push(user); // Pushes user to the userArray after varification
+//         console.log('User Created');
+//     }
+// }
+
+// Create User using localSorage
+function createUser(){
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var apikey = document.getElementById("api-key").value;
@@ -113,14 +184,12 @@ function createUser() {
         return;
     }
 
-    var user = new User(email, password, apikey, sapikey); // Creates user from info given
-
-    // Makes sure passwords are the same and there is no other created account with the same email.
-    if (checkPass() && checkDupAcount(email)) {
-        userArray.push(user); // Pushes user to the userArray after varification
+    var user = new User(email, password, apikey, sapikey); // Creates user from info given\
+    if (checkPass(password) && checkDupAcount(email)) {
+        var userToString = JSON.stringify(user);
+        localStorage.setItem(email, userToString);
         console.log('User Created');
     }
-
 }
 
 // Logs out of Mainpage, back to Login page.
@@ -149,5 +218,8 @@ function Load(params) {
 
 }
 
-loadusers();
-clearLocalStorage();
+
+// module.exports = User;
+// // module.exports = createUser();
+// // module.exports = userArray;
+// module.exports = checkDupAcount();
