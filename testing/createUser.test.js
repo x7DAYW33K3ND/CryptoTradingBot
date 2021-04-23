@@ -1,4 +1,12 @@
 const { test, expect } = require("@jest/globals")
+const myModule = require('./indexfortesting')
+const checkPass = myModule.checkPass;
+const checkDupAcount = myModule.dubAcount;
+const createUser = myModule.createuser;
+const logIn = myModule.logIn;
+
+// const {checkPass, checkDupAcount, createUser} = require('./indexfortesting')
+// const myModule = require('./indexfortesting')
 
 // I just copied the functions because its easier than inporting them
 
@@ -12,62 +20,10 @@ localStorage.setItem(user0.email, JSON.stringify(user0))
 localStorage.setItem(user1.email, JSON.stringify(user1))
 localStorage.setItem(user2.email, JSON.stringify(user2))
 
-/**
- * True if passwords match, False if passwords don't match.
- * @param {String} password users intended password
- * @param {String} confirmPassword users confirmation of intented password
- * @returns True if passwords match, False if passwords don't match.
- */
- function checkPass(password, confirmPassword) {
-    
-    if (password != confirmPassword) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
 
 
 
-/**
- * Checks if there is an account in local storage with same email.
- * @param {String} newEmail Users inputed email.
- * @returns True if email is unique, False if email is already linked with an account
- */
-function checkDupAcount(newEmail) {
-    if (localStorage.getItem(newEmail) != null) {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-/**
- * Takes all info from the sign-in page and varifies
- * Then creates User object and loads it into
- * LocalStorage. 
- * @returns False if any of the feilds are empty.
- */
- function createUser(email , password, confirmPassword , apikey , sapikey) {
-
-    // Validates there are no null fields
-    if (email == '' || password == ''|| confirmPassword == '' || apikey == '' || sapikey == '') {
-        alert("Please fill all fields in");
-        return false;
-    }
-
-    var user = {email: email, psw: password, key: apikey, skey: sapikey} // Creates user from info given
-    if (checkPass(password, confirmPassword) && checkDupAcount(email)) {
-        var userToString = JSON.stringify(user);
-        localStorage.setItem(email, userToString);
-        return true;
-    }else{
-        return false;
-    }
-}
-
-// Password tests
+// Password testsclear
 
 test('Tests check password funciton with 2 different password entered simulating an error', () =>{
     var password = 'mypassword'
@@ -79,6 +35,9 @@ test('Tests check password funciton with 2 different password entered simulating
     expect(checkPass('mypassword', 'myp@ssword')).toBe(false)
 })
 
+test('Tests creating password with matching confirm password', () =>{
+    expect(checkPass('password', 'password')).toBe(true)
+})
 
 // Duplicate Account Tests
 
@@ -118,14 +77,83 @@ test('Test Creating a new user that already exists', () =>{
 })
 
 // make new accounts
-test('Test Creating a new user that already exists', () =>{
-    expect(createUser('user0', 'pass', 'pass', 'key', 'sKey')).toBe(true)
+test('Testing creating unique user', () =>{
+    expect(createUser('newuser', 'pass', 'pass', 'key', 'sKey')).toBe(true)
 })
 
-test('Test Creating a new user that already exists', () =>{
-    expect(createUser('john@gmail.com', 'password', 'pass', 'key', 'sKey')).toBe(true)
+test('Testing creating unique user', () =>{
+    expect(createUser('Owen@gmail.com', 'password', 'password', 'key', 'sKey')).toBe(true)
 })
 
-test('Test Creating a new user that already exists', () =>{
-    expect(createUser('tony@gmail.com', 'password', 'pass', 'key', 'sKey')).toBe(true)
+test('Testing creating unique user', () =>{
+    expect(createUser('Aaron@gmail.com', 'password', 'password', 'key', 'sKey')).toBe(true)
 })
+
+// Making accounts with confirm password error
+test('Testing incorrect confirm password', () =>{
+    expect(createUser('newuser', 'pass', 'passerror', 'key', 'sKey')).toBe(false)
+})
+
+test('Testing incorrect confirm password', () =>{
+    expect(createUser('Owen@gmail.com', 'password', 'passworderror', 'key', 'sKey')).toBe(false)
+})
+
+test('Testing incorrect confirm password', () =>{
+    expect(createUser('Aaron@gmail.com', 'password', 'passworderror', 'key', 'sKey')).toBe(false)
+})
+
+test('Creating new account with null values', () =>{
+    expect(createUser('john', '', '', '', '')).toBe(false)
+})
+test('Creating new account with null values', () =>{
+    expect(createUser('john', 'password', '', '', '')).toBe(false)
+})
+test('Creating new account with null values', () =>{
+    expect(createUser('john', 'password', 'password', '', '')).toBe(false)
+})
+test('Creating new account with null values', () =>{
+    expect(createUser('john', 'password', 'password', 'key', '')).toBe(false)
+})
+
+
+// Testing user login
+
+test('Logging in with correct credentials', () =>{
+    expect(logIn('user0', 'pass')).toBe(true)
+})
+
+test('Logging in with correct credentials', () =>{
+    expect(logIn('john@gmail.com', 'password')).toBe(true)
+})
+
+test('Logging in with correct credentials', () =>{
+    expect(logIn('tony@gmail.com', 'password123')).toBe(true)
+})
+
+test('Logging in without an account and no password', () =>{
+    expect(logIn('userNoAccount', '')).toBe(false)
+})
+
+test('Logging with just a password', () =>{
+    expect(logIn('', 'pass')).toBe(false)
+})
+
+test('Logging in without entering an account and no password', () =>{
+    expect(logIn('', '')).toBe(false)
+})
+
+test('Trying with right account but wrong password', () =>{
+    expect(logIn('user0', 'epass')).toBe(false)
+})
+
+test('Trying with right account but wrong password', () =>{
+    expect(logIn('john@mail.com', 'epass')).toBe(false)
+})
+
+test('Trying with right account but wrong password', () =>{
+    expect(logIn('tony@mail.com', 'epass')).toBe(false)
+})
+
+// Creating a new user and loging in
+
+
