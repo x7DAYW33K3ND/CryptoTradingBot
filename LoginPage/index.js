@@ -1,17 +1,15 @@
-/** Connects login page to mainPage
- * Does not require authntication and will be removed before final release
- */
 
-// Creating user class
-
-
-
-
-// var userArray = [];
-
+// Array of all users, gets cached to LocalStorage
 var userArray = []
-class User {
 
+class User {
+    /** Constructor for User Class
+     * 
+     * @param {*} email Users Email
+     * @param {*} psw Users Password
+     * @param {*} key Users API-Key
+     * @param {*} skey Users Secret API key
+     */
     constructor(email, psw, key, skey) {
 
         this.email = email;
@@ -20,28 +18,21 @@ class User {
         this.skey = skey;
     }
 
-    getEmail(){
+    // Getters
+    getEmail() {
         return this.email;
     }
 
-    getPassword(){
+    getPassword() {
         return this.psw;
     }
 
-    getKey(){
+    getKey() {
         return this.key;
     }
 
-    getskey(){
+    getskey() {
         return this.skey;
-    }
-
-    setEmail(email){
-        this.email = email;
-    }
-
-    setPassword(){
-        this.password = this.password;
     }
 
 }
@@ -50,54 +41,54 @@ class User {
 var user0 = new User('user0', 'pass', 'key', 'secret key');
 var user1 = new User('user1', 'pass', 'key', 'secret key');
 var user2 = new User('user2', 'pass', 'key', 'secret key');
+var user3 = new User('user3', 'pass', 'key', 'secret key');
 
 // Adding user to array for testing
 userArray.push(user0);
 userArray.push(user1);
 userArray.push(user2);
+userArray.push(user3);
 
 
+// 
 function logIn() {
     var enteredEmail = document.getElementById('loginEmail').value;
     var enteredPass = document.getElementById('loginPass').value;
-    enteredEmail = enteredEmail.toString();
-    enteredPass = enteredPass.toString();
-
-    console.log('attempting login');
-    // var index = 0;
-    for (i = 0; i < userArray.length; i++){
-        console.log("loop started");
-        if(userArray[i].getEmail() == enteredEmail){
-            console.log('correct email');
-            if(userArray[i].getPassword() == enteredPass){
-                console.log('your in');
-                window.open("..\\MainPage\\MainPage.html");
+    for (i = 0; i < userArray.length; i++) { // Loops through userArray.
+        if (userArray[i].getEmail() == enteredEmail) { // Checks email.
+            if (userArray[i].getPassword() == enteredPass) { // Checks password.
+                window.open("..\\MainPage\\MainPage.html"); // Closes Login page and brings user to mainPage.
                 window.close("ui.html");
-            }else{
-                alert("Password does not match")
+            } else {
+                alert("Password does not match");
             }
         }
     }
-    
+
 }
 
-
-function checkPass(){
+// Checks to make sure user enters correct password.
+function checkPass() {
     var password = document.querySelector('.password').value,
-    confirmPassword =  document.querySelector('.confirmPassword').value;
-        if(password != confirmPassword){
-            alert("Passwords don't match try again.");
-            return false;
-        }
-        else {
-            return true;
-        }
+        confirmPassword = document.querySelector('.confirmPassword').value;
+    if (password != confirmPassword) {
+        alert("Passwords don't match try again.");
+        return false;
+    }
+    else {
+        return true;
+    }
 }
 
+/**
+ * Checks new users email with pre-existing acount emails.
+ * @param {String} newEmail New accounts email.
+ * @returns True if passwords are unique, False if passwords are not.
+ */
 function checkDupAcount(newEmail) {
-    
-    for (i = 0; i < userArray.length; i++){
-        if(userArray[i].getEmail() == newEmail){
+
+    for (i = 0; i < userArray.length; i++) {
+        if (userArray[i].getEmail() == newEmail) {
             alert("Account with Email already exists");
             return false
         }
@@ -106,108 +97,57 @@ function checkDupAcount(newEmail) {
 }
 
 
-/** This funtion takes in all user info from the sign up page
+/** 
+ * This funtion takes in all user info from the sign up page
  *  and creates a user object from the peramiters
- * 
- * @param {string} email users Email
- * @param {string} pws users Password
- * @param {string} api users API key
- * @param {string} sapi users Private API Key
- */
-
-
-// What you need to do is get these before the funtion is called
+*/
 function createUser() {
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var apikey = document.getElementById("api-key").value;
     var sapikey = document.getElementById("secret-api-key").value;
-    
+
     // Validates there are no null fields
-    if(email == '' || password == '' || apikey == '' || sapikey == ''){
+    if (email == '' || password == '' || apikey == '' || sapikey == '') {
         alert("Please fill all fields in");
         return;
     }
 
-    var user = new User(email, password, apikey, sapikey);
+    var user = new User(email, password, apikey, sapikey); // Creates user from info given
 
-    // Makes sure passwords are the same and there is no other created account with the same email
-    if (checkPass() && checkDupAcount(email)){
-        userArray.push(user);
+    // Makes sure passwords are the same and there is no other created account with the same email.
+    if (checkPass() && checkDupAcount(email)) {
+        userArray.push(user); // Pushes user to the userArray after varification
         console.log('User Created');
     }
 
-
 }
 
-// function two() {
-//     createUser();
-//     savetoFile();
-// }
-function thisWasClicked() {
-    console.log('This was clicked');
+// Logs out of Mainpage, back to Login page.
+function logOut() {
+    window.open("..\\LoginPage\\ui.html");
+    window.close("MainPage.html");
 }
 
 
-function saveToJson() {
-    const fs = require('fs');
-    try{
-        const jsonString = fs.readFileSync('./user.json', 'utf-8');
-    } catch(err){
-        console.log(err)
+// Loads users from userArray into LocalStorage.
+function loadusers() {
+    for (i = 0; i < userArray.length; i++) {
+        var userToString = JSON.stringify(userArray[i]);
+        console.log(userToString);
+        localStorage.setItem(userArray[i].getEmail(), userToString);
+        console.log(localStorage.length);
     }
-    
+}
+
+// Clears LocalStorage.
+function clearLocalStorage() {
+    localStorage.clear();
+}
+
+function Load(params) {
 
 }
 
-
-
-
-// $.getJSON('contacts.json', function (json) {
-//     var array = [];
-//     for (var key in json) {
-//         if (json.hasOwnProperty(key)) {
-//             var item = json[key];
-//             array.push({
-//                 name: item.Name,
-//                 surname: item.Surname,
-//                 mobile: item.mobile,
-//                 email: item.email
-//             });            
-//         }
-//     }
-//     });
-    
-// function savetoFile(){
-//     const fs = require('fs');
-
-//     var data = JSON.stringify(userArray, null, 2);
-
-//     fs.writeFileSync('users.json', data, (err) => {
-//         if (err){
-//             throw err;
-//         }
-//         console.log("Saved.");
-//     });
-
-// }
-
-// function loadFile(){
-//     const fs = require('fs');
-
-//     fs.readFileSync('users.json', 'utf-8', (err,data) => {
-//         if (err){
-//             throw err;
-//         } else {
-//             try{
-//                 const file = JSON.parse(data);
-//                 userArray.users.push(file);
-//             } catch (error){
-//                 console.error(error);
-//             }
-//         }
-//     });
-// }
-/**
- * Makes sure everything in the form is loaded before submitting.
- */
+loadusers();
+clearLocalStorage();

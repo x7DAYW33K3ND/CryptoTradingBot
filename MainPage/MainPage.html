@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Test Main Page</title>
     <link rel="stylesheet" href="MainPageStyle.css">
-    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="..\LoginPage\index.js"></script>
 </head>
 
 <body>
@@ -36,11 +36,13 @@
 
     <div id="first">
     <hr>
-    <h3>Click On the Freqtrade Icon to Begin Installation Instruction</h5>
+    <h3>Click On the Freqtrade Icon to Begin Installation Instruction</h3>
     <h5>When installing freqtrade, it is recommended to use linux/unix.</h5>
     <h5>----- If you do not use linux/unix, install a virtual machine like VirtualBox.</h5>
     <h5>---------- It is recommended to allocate a minimum of 4 CPU cores and 6gb of memory to the VM.</h5>
-    <h5>Note: Use https://core.telegram.org/botBOT_TOKEN_HERE/getUpdates to find your chat ID to add to your config.json file.
+    <h5>Note: Use https://core.telegram.org/botBOT_TOKEN_HERE/getUpdates to find your chat ID to add to your config.json file.</h5>
+    <h5 id="userKey">Key</h5>
+    <h5 id="userSKey">S Key</h5>
     </div>
 	    
     <button type="button" id="logOutBtn" onclick="logOut()">Log Out</button>
