@@ -79,12 +79,13 @@ function logIn() {
 
 
 /**
- * Compares entered password and confirm password
- * @param {String} password 
+ * True if passwords match, False if passwords don't match.
+ * @param {String} password users intended password
+ * @param {String} confirmPassword users confirmation of intented password
  * @returns True if passwords match, False if passwords don't match.
  */
-function checkPass(password) {
-    confirmPassword = document.querySelector('.confirmPassword').value;
+function checkPass(password, confirmPassword) {
+    
     if (password != confirmPassword) {
         alert("Passwords don't match try again.");
         return false;
@@ -121,20 +122,21 @@ function checkDupAcount(newEmail) {
 function createUser() {
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
+    var confirmPassword = document.querySelector('.confirmPassword').value;
     var apikey = document.getElementById("api-key").value;
     var sapikey = document.getElementById("secret-api-key").value;
 
     // Validates there are no null fields
-    if (email == '' || password == '' || apikey == '' || sapikey == '') {
+    if (email == '' || password == ''|| confirmPassword == '' || apikey == '' || sapikey == '') {
         alert("Please fill all fields in");
         return false;
     }
 
     var user = new User(email, password, apikey, sapikey); // Creates user from info given\
-    if (checkPass(password) && checkDupAcount(email)) {
+    if (checkPass(password, cconfirmPassword) && checkDupAcount(email)) {
         var userToString = JSON.stringify(user);
         localStorage.setItem(email, userToString);
-        console.log('User Created');
+        return true;
     }
 }
 
